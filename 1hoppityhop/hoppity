@@ -1,0 +1,12 @@
+#!/usr/bin/env ruby
+f = open(ARGV[0],'r')
+n = f.readline.to_i
+for i in 1..n
+    if(i % 3 == 0 && i % 5 == 0)
+        print "Hop\n"
+    elsif (i % 3 == 0)
+        print "Hoppity\n"
+    elsif(i % 5 == 0)
+        print "Hophop\n"
+        end
+end
