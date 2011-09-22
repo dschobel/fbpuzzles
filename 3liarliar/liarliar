@@ -1,0 +1,61 @@
+#!/usr/bin/env ruby
+require 'set'
+
+
+Vertex = Struct.new(:name, :color)
+@visited = Set.new
+
+def dfs_visit_and_count(graph,node_name,depth)
+    print "#{"\t" *depth}visiting #{node_name} at depth #{depth}\n"
+
+    @visited.add(node_name)
+    #node.color = :gray
+    if(graph[node_name])
+    for neighbor in graph[node_name]
+        #if neighbor.color == :white
+        if (@visited.include? neighbor) == false
+            dfs_visit_and_count(graph, neighbor, depth+1)
+        end
+    end
+    end
+    #node.color = :black
+return 1,2
+end
+
+
+f         = open(ARGV[0], 'r')
+num_lines = f.readline.to_i
+vertices = {}
+
+
+#build graph
+for _ in 1..num_lines
+  line    = f.readline
+  data    = line.split
+  name = data[0]
+  number_of_names = data[1].to_i
+
+  for _ in 1..number_of_names
+      if (!vertices[name])
+        vertices[name] = []#Vertex.new(name,:white)
+      end
+      vertices[name] << f.readline.chomp #Vertex.new(f.readline.chomp,:white)
+  end
+end
+
+g = {'a' => ['b','c'],
+     'b' => [],
+     'c' => ['d'],
+     'd' => ['e'],
+     'e' =>[]}
+#walk it
+result = dfs_visit_and_count(vertices, vertices.keys.first, 0)
+#result = dfs_visit_and_count(g, 'a', 0)
+
+if(result[0] > result[1])
+    puts "#{result[0]} #{result[1]}\n"
+else 
+    puts "#{result[1]} #{result[0]}\n"
+end
+
+#return count_one, count_two

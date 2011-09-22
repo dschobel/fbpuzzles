@@ -1,0 +1,3 @@
+$ java LLTest 100000 20090727 >1.in
+$ time ./python/liarliar 1.in
+50091 49909
